@@ -1,3 +1,25 @@
-body{
+body, .album{
     background-color: rgb(221, 221, 221);
+}
+.navbar-light .navbar-brand{
+    color: #FFF;
+}
+nav.bg-light{
+    background-color: #3C484F!important;
+}
+.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link{
+    color: #FFF;
+    font-weight: bold;
+}
+p button{
+    margin: 2px;
+}
+.navbar-brand:hover{
+    color:#FFF!important;
+}
+.nav-link:hover {
+    color:lavender!important;
+}
+input{
+    text-align:center;
 }

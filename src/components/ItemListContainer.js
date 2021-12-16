@@ -1,8 +1,10 @@
+import ItemCount from "./ItemCount"
+
 function ItemListContainer({greeting}) {
     return (
-        <div>
-            Listado de items
-        </div>
+        <>
+            <ItemCount stock={5} initial={1}/>
+        </>
     )
 }
 
