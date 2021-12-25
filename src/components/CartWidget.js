@@ -1,7 +1,7 @@
 function CartWidget() {
     return (
         <>
-          <span><i className="bi-cart"/></span>
+          <i className="bi-cart"/>
         </>
     )
 }

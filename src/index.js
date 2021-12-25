@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import App from './App';
-import "./estilos.css";
+import "./estilos.scss";
 
 //3)  Tener por lo menos un componente
 
