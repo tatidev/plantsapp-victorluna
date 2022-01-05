@@ -1,4 +1,5 @@
 import CartWidget from './CartWidget'
+import {NavLink} from 'react-router-dom'
 
 const NavBar = () => {
     return (
@@ -8,16 +9,16 @@ const NavBar = () => {
                 <div className="collapse navbar-collapse flex-grow-1 justify-content-center">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-5">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#"><i className="bi-house"/>Home</a>
+                            <NavLink className="nav-link" to={'/'}><i className="bi-house"/>Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#"><i className="bi-info-square"/>Info</a>
+                            <NavLink className="nav-link" to={'/info'}><i className="bi-info-square"/>Info</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#"><i className="bi-suit-heart"/>Favoritos</a>
+                            <NavLink className="nav-link" to={'/fav'}><i className="bi-suit-heart"/>Favoritos</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#"><CartWidget/>&nbsp;Carro</a>
+                            <NavLink className="nav-link" to={'/Carro'}><CartWidget/>&nbsp;Carro</NavLink>
                         </li>
                     </ul>
                 </div>

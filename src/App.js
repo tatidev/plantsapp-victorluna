@@ -1,7 +1,6 @@
-//import Main from './components/Main';
 import NavBar from './components/NavBar';
-import ItemListContainer from './components/ItemListContainer';
-import ItemDetailContainer from './components/ItemDetailContainer';
+import Main from './components/Main';
+import { BrowserRouter } from 'react-router-dom';
 
 const galleryData = {
     numberOfItems : 6,
@@ -10,13 +9,10 @@ const galleryData = {
 
 function App(){
     return (
-        <>
-        <NavBar/>
-        <ItemDetailContainer/>
-        {
-        //<Main galleryData={galleryData}/>
-        }
-        </>
+        <BrowserRouter>
+            <NavBar/>
+            <Main/>
+        </BrowserRouter>
     );
 }
 

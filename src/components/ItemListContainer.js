@@ -29,7 +29,7 @@ function ItemListContainer({greeting}) {
 
     }, [])
     return (
-        <div className="album py-5 bg-light">
+        <div className="album">
             <div className="container">
             {(loading) ? 'Loading..' : 
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
