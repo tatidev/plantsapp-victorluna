@@ -1,0 +1,38 @@
+[
+    {
+     "name": "Arboles",
+     "id": "1"
+    },
+    {
+     "name": "Arbustos",
+     "id": "2"
+    },
+    {
+     "name": "Herbaceas",
+     "id": "3"
+    },
+    {
+     "name": "Cubresuelos",
+     "id": "4"
+    },
+    {
+     "name": "Gramineas",
+     "id": "5"
+    },
+    {
+     "name": "Enredaderas",
+     "id": "6"
+    },
+    {
+     "name": "Coníferas",
+     "id": "7"
+    },
+    {
+     "name": "Plantas trópicales",
+     "id": "8"
+    },
+    {
+     "name": "Palmeras",
+     "id": "9"
+    }
+   ]

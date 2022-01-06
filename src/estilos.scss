@@ -29,12 +29,37 @@ input{
     }
 }
 
+header a{
+    margin-left: 1rem;
+}
+
+.album a img{
+    width: 100%;
+}
+
+.itemListContainer{
+    .card{
+        min-height: 500px;
+    }
+    .card-body{
+        display: flex;
+        align-items: flex-end;
+        >div {
+            width: 100%;
+        }
+    }
+    img {
+        width:100%;
+        
+    }
+}
+
 .itemDetailContainer{
     margin-top: 10px;
     .item-photo{
         display:flex;
         justify-content:center;
-        align-items:center;
+        align-items:flex-start;
         border-right:1px solid #4d4c4c;
     }
     .section{
@@ -77,5 +102,24 @@ input{
             color:black;
             padding-bottom: 5px;
         }    
+    }
+}
+
+.itemDetail{
+    img { width: 100%}
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 7px 0;
+        li {
+            margin: 7px 0;
+            text-transform: capitalize;
+            b{
+                margin-right: 5px;
+            }
+        }
+    }
+    button {
+        margin-right: 5px;
     }
 }

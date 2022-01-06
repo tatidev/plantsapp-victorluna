@@ -1,13 +1,15 @@
 import {useEffect, useState} from 'react'
+import { useParams } from 'react-router-dom'
 import ItemDetail from './ItemDetail'
+
 
 function ItemDetailContainer() {
     const [product, setProduct] = useState([])
     const [loading, setLoading] = useState(true)
-
+    const {id} = useParams()
+    
     useEffect(() => {
-        const getItem = fetch('https://fakestoreapi.com/products/1')
-
+        const getItem = fetch('https://61c3d77ff1af4a0017d990bb.mockapi.io/API/v1/product/'+id)
         getItem
             .then((res)=> {
                 return res.json()
@@ -15,24 +17,17 @@ function ItemDetailContainer() {
             .then((item)=>{
                 setProduct(item)
                 setLoading(false)
-                console.log(item)
             })
             .catch((rej)=>{
                 console.log(rej)
             })
-
-        /*promesa.then((item)=>{
-            setProduct(item)
-            setLoding(false)
-        })*/
-    }, [])
+    }, [id])
 
     return (
         <div className='container itemDetailContainer'>
             {
-            (loading) ? 'Loading..' : <ItemDetail item={product} />
+            (loading) ? 'Cargando producto..' : <ItemDetail item={product} />
             }
-            
         </div>
     )
 }
