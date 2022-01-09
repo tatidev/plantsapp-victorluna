@@ -1,8 +1,27 @@
 import ItemCount from "./ItemCount"
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import {useState} from 'react'
+
 
 function ItemDetail({item}) {
     const navigate = useNavigate()
+    const [contadorCarro, setContadorCarro] = useState(null)
+    const [showGoToCart, setShowGoToCart] = useState(false)
+
+    let itemProps = {}
+    if((item.follaje).length > 0) itemProps.follaje = item.follaje
+    if((item.altura).length > 0) itemProps.altura = item.altura
+    if((item.diametro).length > 0) itemProps.diametro = item.diametro
+    if((item.distanciaEntrePlantas).length > 0) itemProps.distanciaEntrePlantas = item.distanciaEntrePlantas
+    if((item.riego).length > 0) itemProps.riego = item.riego
+    if((item.toleranciaFrio).length > 0) itemProps.toleranciaFrio = item.toleranciaFrio
+
+    
+    const onAdd = (cantidad)=>{
+        setContadorCarro(cantidad)
+        setShowGoToCart(true)
+    }
+
     return (
         <div className="row itemDetail">
             <div className="col-sm-4 item-photo">
@@ -13,19 +32,16 @@ function ItemDetail({item}) {
                 {(item.comentarios).length > 0 ?  <p>{item.comentarios}</p> : ''    }
                 <ul>
                     <li><b>Categoría:</b>{item.category}</li>
-                    { (item.follaje).length > 0 ?  <li><b>Follaje:</b>{item.follaje}</li> : ''}
-                    {(item.asolamiento).length > 0 ?  <li><b>Asolamiento:</b>{item.asolamiento}</li> : ''    }
-                    {(item.altura).length > 0 ?  <li><b>Altura:</b>{item.altura}</li> : ''    }
-                    {(item.diametro).length > 0 ?  <li><b>Diametro:</b>{item.diametro}</li> : ''    }
-                    {(item.distanciaEntrePlantas).length > 0 ?  <li><b>Distancia entre plantas:</b>{item.distanciaEntrePlantas}</li> : ''    }
-                    {(item.riego).length > 0 ?  <li><b>riego:</b>{item.riego}</li> : ''    }
-                    {(item.toleranciaFrio).length > 0 ?  <li><b>tolerancia al frío:</b>{item.toleranciaFrio}</li> : ''    }
+                    {
+                    Object.entries(itemProps).map(([key, value]) =>{
+                        return <li key={key}><b>{key}:</b>{value}</li>
+                    })
+                    }
                     <li><b>stock:</b>{item.stock}</li>
                     <li><b>Precio:</b>{"$" + item.price}</li>
                 </ul>
-                <ItemCount stock={item.stock} initial={1}/>    
+                {showGoToCart ? <Link as="button" className="btn btn-sm btn-success " to="/carro">Ir al carro</Link> : <ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>    }
                 <div className="section" >
-                    <button className="btn btn-success"><span  className="bi-shopping-cart" aria-hidden="true"></span> Agregar al carro</button>
                     <button className="btn btn-secondary " onClick={()=> navigate(-1)}>Volver</button>
                 </div>        
             </div>

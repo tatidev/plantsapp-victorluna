@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import ItemDetail from './ItemDetail'
-
+import Spinner from "./Spinner"
 
 function ItemDetailContainer() {
     const [product, setProduct] = useState([])
@@ -26,7 +26,7 @@ function ItemDetailContainer() {
     return (
         <div className='container itemDetailContainer'>
             {
-            (loading) ? 'Cargando producto..' : <ItemDetail item={product} />
+            (loading) ? <Spinner/> : <ItemDetail item={product} />
             }
         </div>
     )

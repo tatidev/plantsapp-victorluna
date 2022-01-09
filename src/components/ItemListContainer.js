@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom'
 import ItemList from "./ItemList"
 import CategoriesContainer from "./CategoriesContainer"
-
+import Spinner from "./Spinner"
 
 function ItemListContainer({greeting}) {
    
@@ -36,7 +36,7 @@ function ItemListContainer({greeting}) {
         <CategoriesContainer/>
             <div className="album">
                 <div className="container itemListContainer">
-                {(loading) ? 'Loading..' : 
+                {(loading) ? <Spinner/> : 
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         <ItemList items={products}/>
                     </div>

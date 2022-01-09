@@ -11,12 +11,13 @@ function ItemCount({stock, initial, onAdd}) {
     }
 
     return (
-        <div className="section" >
+        <div className="section itemCount" >
             <h6 className="title-attr"><small>CANTIDAD</small></h6>                    
             <div>
                 <div className="btn-minus-plus" onClick={disminuirContador}><span className="bi-dash"></span></div>
                 <input type="text" readOnly value={contador} />
                 <div className="btn-minus-plus" onClick={aumentarContador}><span className="bi-plus"></span></div>
+                <button className="btn btn-sm btn-success" onClick={()=>{onAdd(contador)}}><span  className="bi-shopping-cart" aria-hidden="true"></span>Agregar al carro</button>
             </div>
         </div>  
 
