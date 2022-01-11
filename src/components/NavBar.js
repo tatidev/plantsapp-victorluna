@@ -1,6 +1,7 @@
 import CartWidget from './CartWidget'
 import {NavLink} from 'react-router-dom'
 
+
 const NavBar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +19,7 @@ const NavBar = () => {
                             <NavLink className="nav-link" to={'/fav'}><i className="bi-suit-heart"/>Favoritos</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to={'/Carro'}><CartWidget/>&nbsp;Carro</NavLink>
+                            <NavLink className="nav-link cartWidget" to={'/Carro'}><CartWidget/></NavLink>
                         </li>
                     </ul>
                 </div>

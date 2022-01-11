@@ -7,6 +7,9 @@ body, .album{
 nav.bg-light{
     background-color: #3C484F!important;
 }
+.navbar .cartWidget .badge{
+    background-color: grey;
+}
 .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link{
     color: #FFF;
     font-weight: bold;
@@ -129,3 +132,4 @@ header a{
         margin-left: 5px;
     }
 }
+
