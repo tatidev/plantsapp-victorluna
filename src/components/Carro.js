@@ -16,13 +16,13 @@ function Carro() {
                     {
                         itemList.map((e, k) => {
                             return (
-                                <li>
+                                <li key={k}>
                                     <ul>
                                         <li>Item id:{e.id}</li>
                                         <li>Nombre:{e.name}</li>
                                         <li>Cantidad:{e.cantidad}</li>
                                         <li>Precio:{e.price}</li>
-                                        <li>Subototal:{e.price}</li>
+                                        <li>Subototal:{e.cantidad * e.price}</li>
                                     </ul>
                                 </li>
                             )

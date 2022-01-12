@@ -2,14 +2,16 @@ import ItemCount from "./ItemCount"
 import {Link, useNavigate} from 'react-router-dom'
 import {useState, useContext, useEffect} from 'react'
 import {cartContext} from "./CartContext"
-import $ from 'jquery'
 
 function ItemDetail({item}) {
     const navigate = useNavigate()
     const [showGoToCart, setShowGoToCart] = useState(false)
-    const [showIsInCart, setShowIsInCart] = useState(false)
-    const {isInCart, dispatch} = useContext(cartContext)
+    const {dispatch, cartState} = useContext(cartContext)
 
+    let initial = 0
+    let itemInCart = cartState.itemList.find(e => e.id == item.id)
+    console.log(itemInCart)
+    if(itemInCart != undefined) initial = itemInCart.cantidad
     
     let itemProps = {}
     if((item.follaje).length > 0) itemProps.follaje = item.follaje
@@ -21,12 +23,10 @@ function ItemDetail({item}) {
 
     
     const onAdd = (cantidad)=>{
-        if(isInCart(item.id)){
-            setShowIsInCart(true)
-        }else{
+        if(cantidad > 0){
             item.cantidad = cantidad
-            dispatch({type: 'addItem', itemsCount: cantidad, itemsPrice: item.price, itemList: item})
-            setShowGoToCart(true)
+            dispatch({type: 'addItem', item: item})
+            //setShowGoToCart(true)
         }
     }
 
@@ -48,8 +48,7 @@ function ItemDetail({item}) {
                     <li><b>stock:</b>{item.stock}</li>
                     <li><b>Precio:</b>{"$" + item.price}</li>
                 </ul>
-                {showGoToCart ? <Link as="button" className="btn btn-sm btn-success " to="/carro">Ir al carro</Link> : <ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>    }
-                {showIsInCart ? <div className="alert alert-danger">El item ya se encuentra en el carro</div>:''}
+                {showGoToCart ? <Link as="button" className="btn btn-sm btn-success " to="/carro">Ir al carro</Link> : <ItemCount stock={item.stock} initial={initial} onAdd={onAdd}/>    }
                 <div className="section" >
                     <button className="btn btn-secondary " onClick={()=> navigate(-1)}>Volver</button>
                 </div>        

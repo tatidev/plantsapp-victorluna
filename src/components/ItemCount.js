@@ -17,7 +17,7 @@ function ItemCount({stock, initial, onAdd}) {
                 <div className="btn-minus-plus" onClick={disminuirContador}><span className="bi-dash"></span></div>
                 <input type="text" readOnly value={contador} />
                 <div className="btn-minus-plus" onClick={aumentarContador}><span className="bi-plus"></span></div>
-                <button className="btn btn-sm btn-success" onClick={()=>{onAdd(contador)}}><span  className="bi-shopping-cart" aria-hidden="true"></span>Agregar al carro</button>
+                <button className="btn btn-sm btn-success" onClick={()=>{onAdd(contador)}}><span  className="bi-shopping-cart" aria-hidden="true"></span>{initial == 0 ? 'Agregar al ' : 'modificar '} carro</button>
             </div>
         </div>  
 
