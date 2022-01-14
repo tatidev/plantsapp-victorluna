@@ -59,9 +59,7 @@ const CartProvider = ({children}) => {
         cartState,
         dispatch
     }
-
-
-
+   
     return (
         <Provider value={contextValue}>
             {children}

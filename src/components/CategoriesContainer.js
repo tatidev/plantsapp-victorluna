@@ -24,7 +24,7 @@ function CategoriesContainer() {
                 <div className="row">
                     <div className="col-lg-12 col-md-12 mx-auto">
                         <p>
-                            {(loading) ? 'Cargando categorías..' : <Categories links={categories} />}
+                            {(loading) ? '' : <Categories links={categories} />}
                         </p>
                     </div>
                 </div>

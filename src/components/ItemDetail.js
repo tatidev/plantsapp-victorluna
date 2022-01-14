@@ -1,32 +1,31 @@
 import ItemCount from "./ItemCount"
 import {Link, useNavigate} from 'react-router-dom'
-import {useState, useContext, useEffect} from 'react'
+import {useState, useContext} from 'react'
 import {cartContext} from "./CartContext"
+import ButtonBack from './ButtonBack'
 
 function ItemDetail({item}) {
     const navigate = useNavigate()
-    const [showGoToCart, setShowGoToCart] = useState(false)
     const {dispatch, cartState} = useContext(cartContext)
-
+    let itemProps = {}
     let initial = 0
+
     let itemInCart = cartState.itemList.find(e => e.id == item.id)
-    console.log(itemInCart)
     if(itemInCart != undefined) initial = itemInCart.cantidad
     
-    let itemProps = {}
     if((item.follaje).length > 0) itemProps.follaje = item.follaje
     if((item.altura).length > 0) itemProps.altura = item.altura
     if((item.diametro).length > 0) itemProps.diametro = item.diametro
     if((item.distanciaEntrePlantas).length > 0) itemProps.distanciaEntrePlantas = item.distanciaEntrePlantas
     if((item.riego).length > 0) itemProps.riego = item.riego
     if((item.toleranciaFrio).length > 0) itemProps.toleranciaFrio = item.toleranciaFrio
-
     
     const onAdd = (cantidad)=>{
         if(cantidad > 0){
             item.cantidad = cantidad
             dispatch({type: 'addItem', item: item})
-            //setShowGoToCart(true)
+        }else{
+            dispatch({type: 'removeItem', idToRemove: item.id})
         }
     }
 
@@ -48,10 +47,9 @@ function ItemDetail({item}) {
                     <li><b>stock:</b>{item.stock}</li>
                     <li><b>Precio:</b>{"$" + item.price}</li>
                 </ul>
-                {showGoToCart ? <Link as="button" className="btn btn-sm btn-success " to="/carro">Ir al carro</Link> : <ItemCount stock={item.stock} initial={initial} onAdd={onAdd}/>    }
-                <div className="section" >
-                    <button className="btn btn-secondary " onClick={()=> navigate(-1)}>Volver</button>
-                </div>        
+                
+                <ItemCount stock={item.stock} initial={initial} onAdd={onAdd}/>
+                <ButtonBack/>
             </div>
         </div>
     )

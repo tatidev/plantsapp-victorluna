@@ -1,27 +1,27 @@
 import {Link} from 'react-router-dom'
 import { useContext } from 'react'
-import { cartContext } from './CartContext'
+import { favContext } from './FavContext'
 import ButtonBack from './ButtonBack'
 
-function Carro() {
-    const {cartState, dispatch} = useContext(cartContext)
-    const {itemsTotalPrice, itemList} = cartState
+function Favoritos() {
+    const {favState, dispatchFav} = useContext(favContext)
+    const {itemList} = favState
 
     const removeItem = itemId =>{
-        dispatch({type:'removeItem', idToRemove:itemId})
+        dispatchFav({type:'removeItem', idToRemove:itemId})
     }
 
-    const clearCart = () => {
-        dispatch({type:'clear'})
+    const clearFav = () => {
+        dispatchFav({type:'clear'})
     }
 
     return (
         <div className="carroPage">
-            {itemsTotalPrice == 0 ? <div className="cartEmpty">
-                                        <div className='header'><i className="bi-cart-x"></i></div>
+            {itemList.length == 0 ? <div className="cartEmpty">
+                                        <div className='header'><i className="bi-heart"></i></div>
                                         <p>
-                                            <h4>No hay productos en el carro</h4>
-                                            <Link as="button" to={"/"} className='btn btn-success'>Seguir comprando</Link>
+                                            <h4>No hay productos favoritos</h4>
+                                            <Link as="button" to={"/"} className='btn btn-success'>Seguir navegando</Link>
                                         </p>
 
                                     </div>
@@ -32,10 +32,7 @@ function Carro() {
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th className="text-center">Cantidad</th>
-                                <th className="text-center">Precio</th>
-                                <th className="text-center">Subtotal</th>
-                                <th className="text-center"><button className="btn btn-sm btn-outline-danger" onClick={clearCart}>Vaciar Carro</button></th>
+                                <th className="text-center"><button className="btn btn-sm btn-outline-danger" onClick={clearFav}>Vaciar Favoritos</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,11 +51,6 @@ function Carro() {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="text-center">
-                                            <div className="count-input">{e.cantidad}</div>
-                                        </td>
-                                        <td className="text-center text-lg text-medium">${e.price}</td>
-                                        <td className="text-center text-lg text-medium">${e.cantidad * e.price}</td>
                                         <td className="text-center"><a className="remove-from-cart" href="#" onClick={removeItem.bind(this, e.id)} data-toggle="tooltip" title="" data-original-title="Remove item"><i className="bi-trash"></i></a></td>
                                     </tr>
                                     )
@@ -68,13 +60,7 @@ function Carro() {
                     </table>
                 </div>
                 <div className="shopping-cart-footer">
-                    <div className="column">
-                    </div>
-                    <div className="column text-lg">Total: <span className="text-medium">${itemsTotalPrice}</span></div>
-                </div>
-                <div className="shopping-cart-footer">
                     <ButtonBack/>
-                    <div className="column"><a className="btn btn-sm btn-success" href="#">Terminar la compra</a></div>
                 </div>
             </div>
         }
@@ -82,4 +68,4 @@ function Carro() {
     )
 }
 
-export default Carro
+export default Favoritos
