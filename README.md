@@ -17,6 +17,10 @@
     * Endopoint __producto__ : Devuelve el listado de productos.
     * Los arhivos mock-category.json y mock-products.json que se encuentran en la raíz de este proyecto contienen el json con el que fueron armados los endpoints
 
+## Mapa de componentes del sitio
+![components map](https://github.com/tatidev/plantsapp-victorluna/tree/master/public/components_map.png?raw=true)
+
+
 ## Setup del proyecto ##
 npm install
 
