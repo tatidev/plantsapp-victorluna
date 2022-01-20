@@ -3,9 +3,9 @@ import {Link, useNavigate} from 'react-router-dom'
 import {useState, useContext} from 'react'
 import {cartContext} from "./CartContext"
 import ButtonBack from './ButtonBack'
+import Carousel from 'react-bootstrap/Carousel';
 
 function ItemDetail({item}) {
-    const navigate = useNavigate()
     const {dispatch, cartState} = useContext(cartContext)
     let itemProps = {}
     let initial = 0
@@ -29,10 +29,25 @@ function ItemDetail({item}) {
         }
     }
 
+    const images = [...item.images]
+    images.unshift(item.imagenPortada)
+
     return (
         <div className="row itemDetail">
             <div className="col-sm-4 item-photo">
-                <img src={item.imagenPortada} alt=""/>
+            <Carousel fade>
+            {(images).map((e, k) => {
+                return <Carousel.Item key={k}>
+                            <img
+                            className="d-block w-100"
+                            src={e}
+                            alt=""
+                            />
+                        </Carousel.Item>
+                })}
+            </Carousel>
+                   
+                
             </div>
             <div className="col-sm-6">
                 <h3>{item.name}</h3>

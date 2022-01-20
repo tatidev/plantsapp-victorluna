@@ -20,8 +20,10 @@ function Carro() {
             {itemsTotalPrice == 0 ? <div className="cartEmpty">
                                         <div className='header'><i className="bi-cart-x"></i></div>
                                         <p>
-                                            <h4>No hay productos en el carro</h4>
-                                            <Link as="button" to={"/"} className='btn btn-success'>Seguir comprando</Link>
+                                            <div>
+                                                <h4>No hay productos en el carro</h4>
+                                                <Link as="button" to={"/"} className='btn btn-success'>Seguir comprando</Link>
+                                            </div>
                                         </p>
 
                                     </div>
@@ -42,7 +44,7 @@ function Carro() {
                             {
                             itemList.map((e, k) => {
                                 return (
-                                    <tr>
+                                    <tr key={k}>
                                         <td>
                                             <div className="product-item">
                                                 <Link to={'/item/' + e.id} className="product-thumb"><img src={e.imagenPortada} width="110px" height="90px"  alt="Product"/></Link>

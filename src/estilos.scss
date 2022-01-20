@@ -43,7 +43,7 @@ header a{
 
 .itemListContainer{
     .card{
-        min-height: 500px;
+        min-height: 450px;
     }
     .card-body{
         display: flex;
@@ -52,10 +52,14 @@ header a{
             width: 100%;
         }
     }
-    img {
-        width:100%;
-        object-fit: contain;
+    .img{
+        height: 300px;
+        img {
+            width:100%;
+            max-height: 100%;
+        }
     }
+    
 }
 
 .itemDetailContainer{

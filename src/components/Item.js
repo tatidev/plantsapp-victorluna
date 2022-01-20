@@ -42,7 +42,9 @@ const Item = ({item}) => {
     return (
         <div className="col" id={item.id}>
             <div className="card shadow-sm">
-                <Link to={'/item/' + item.id}> <img src={item.imagenPortada} alt=""/> </Link>
+                <div className="img">
+                    <Link to={'/item/' + item.id}> <img src={item.imagenPortada} alt=""/> </Link>
+                </div>
                 <div className="card-body">
                     <div>
                         <p className="card-text">{item.name}</p>

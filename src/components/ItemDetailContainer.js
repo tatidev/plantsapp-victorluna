@@ -2,6 +2,8 @@ import {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import ItemDetail from './ItemDetail'
 import Spinner from "./Spinner"
+import { db } from "./Firebase"
+import { collection , getDoc, doc } from "firebase/firestore"
 
 function ItemDetailContainer() {
     const [product, setProduct] = useState([])
@@ -9,13 +11,12 @@ function ItemDetailContainer() {
     const {id} = useParams()
     
     useEffect(() => {
-        const getItem = fetch('https://61c3d77ff1af4a0017d990bb.mockapi.io/API/v1/product/'+id)
+        const coleccionProductos = collection(db, 'products')
+        const documentRef = doc(coleccionProductos, id)
+        const getItem = getDoc(documentRef)
         getItem
-            .then((res)=> {
-                return res.json()
-            })
             .then((item)=>{
-                setProduct(item)
+                setProduct({id: item.id, ...item.data()})
                 setLoading(false)
             })
             .catch((rej)=>{
@@ -24,6 +25,7 @@ function ItemDetailContainer() {
     }, [id])
 
     return (
+
         <div className='container itemDetailContainer'>
             {
             (loading) ? <Spinner/> : <ItemDetail item={product} />

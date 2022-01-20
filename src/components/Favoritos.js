@@ -20,8 +20,10 @@ function Favoritos() {
             {itemList.length == 0 ? <div className="cartEmpty">
                                         <div className='header'><i className="bi-heart"></i></div>
                                         <p>
-                                            <h4>No hay productos favoritos</h4>
-                                            <Link as="button" to={"/"} className='btn btn-success'>Seguir navegando</Link>
+                                            <div>
+                                                <h4>No hay productos favoritos</h4>
+                                                <Link as="button" to={"/"} className='btn btn-success'>Seguir navegando</Link>
+                                            </div>
                                         </p>
 
                                     </div>
@@ -39,7 +41,7 @@ function Favoritos() {
                             {
                             itemList.map((e, k) => {
                                 return (
-                                    <tr>
+                                    <tr key={k}>
                                         <td>
                                             <div className="product-item">
                                                 <Link to={'/item/' + e.id} className="product-thumb"><img src={e.imagenPortada} width="110px" height="90px"  alt="Product"/></Link>

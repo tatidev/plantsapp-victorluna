@@ -1,21 +1,22 @@
 import Categories from './Categories';
 import { useEffect, useState} from 'react'
+import { db } from "./Firebase"
+import { collection , getDocs} from "firebase/firestore"
 
 function CategoriesContainer() {
     const [categories, setCategories] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const getData = fetch('https://61c3d77ff1af4a0017d990bb.mockapi.io/API/v1/categories')
+        const categoriesCollection = collection(db, "category")
+        const getData = getDocs(categoriesCollection)
         
         getData
-        .then(res => {
-            return res.json()
-        })
-        .then(res => {
-            setCategories(res)
+        .then((res) => {
+            setCategories(res.docs.map(doc=>({id: doc.id, ...doc.data()})))
             setLoading(false)
         })
+
 
     }, [])
     return (
