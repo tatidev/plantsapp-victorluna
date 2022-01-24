@@ -1,11 +1,15 @@
 import {Link} from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useState} from 'react'
 import { cartContext } from './CartContext'
 import ButtonBack from './ButtonBack'
+import { db } from "./Firebase"
+import { collection , addDoc , serverTimestamp } from "firebase/firestore"
+import {toastInfo} from '../util/ToastSettings'
 
 function Carro() {
     const {cartState, dispatch} = useContext(cartContext)
     const {itemsTotalPrice, itemList} = cartState
+    const [order, setOrder] = useState(false)
 
     const removeItem = itemId =>{
         dispatch({type:'removeItem', idToRemove:itemId})
@@ -13,6 +17,36 @@ function Carro() {
 
     const clearCart = () => {
         dispatch({type:'clear'})
+    }
+
+    const orderCreate = () => {
+
+        const orderCollection = collection(db,"orders")
+
+        const user = {
+            nombre : "Victor",
+            email : "victor@mail.com",
+            telefono : "123456789"
+        }
+
+        const orderDetail = {
+            user ,
+            itemList,
+            itemsTotalPrice,
+            created_at : serverTimestamp()
+        }
+
+        const orderDoc = addDoc(orderCollection,orderDetail)
+
+        orderDoc
+        .then((res)=>{
+            setOrder(res.id)
+            toastInfo('Orden generada')
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+
     }
 
     return (
@@ -76,7 +110,7 @@ function Carro() {
                 </div>
                 <div className="shopping-cart-footer">
                     <ButtonBack/>
-                    <div className="column"><a className="btn btn-sm btn-success" href="#">Terminar la compra</a></div>
+                    <div className="column"><a className="btn btn-sm btn-success" href="#" onClick={orderCreate}>Terminar la compra</a></div>
                 </div>
             </div>
         }

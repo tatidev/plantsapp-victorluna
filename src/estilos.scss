@@ -184,13 +184,20 @@ header a{
         border-bottom-width: 1px;
     }
 
-    .shopping-cart .remove-from-cart
+    .shopping-cart .btn-rows
     {
         display: inline-block;
-        color: #ff5252;
         font-size: 18px;
         line-height: 1;
         text-decoration: none
+    }
+
+    .remove-from-cart{
+        color: #ff5252;
+    }
+
+    .detail-from-cart{
+        color: #070707;
     }
 
     .shopping-cart .count-input
@@ -338,3 +345,27 @@ header a{
       transform: translateX(100px) scale(0.3);
     }
   }   
+
+  .btn-avatarDropdown{
+    color: #FFF;
+  }
+  .btn-avatarDropdown:hover{
+    color: rgb(185, 185, 185);
+  }
+  .btn-avatarDropdown:focus{
+    color: rgb(185, 185, 185);
+    box-shadow: none;
+  }      
+  .avatarDropdownMenu{
+        background-color: #3C484F;   
+        .dropdown-item{
+            color: #FFF;
+            >
+            i {
+                margin-right: 0.5em;
+            }
+        }
+        .dropdown-item:hover, .dropdown-item:focus{
+            background-color: #485157;   
+        }
+  }

@@ -1,8 +1,14 @@
 import CartWidget from './CartWidget'
-import {NavLink} from 'react-router-dom'
-
+import {NavLink, Link} from 'react-router-dom'
+import { setImageToSrc } from '../util/StorageUtils'
+import { useEffect } from 'react'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const NavBar = () => {
+    useEffect(() => {
+        setImageToSrc('vlprofile.jpg', 'userAvatar')
+    }, [])
+    
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -23,7 +29,17 @@ const NavBar = () => {
                         </li>
                     </ul>
                 </div>
-                <div className='flex-grow-1'></div>
+
+                <Dropdown>
+                    <Dropdown.Toggle variant="avatarDropdown" id="dropdown-basic">
+                    <img id="userAvatar" src="" width="40" height="40" className="rounded-circle"/>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu className="avatarDropdownMenu">
+                        <Dropdown.Item href="#/action-1"><i className="bi-person"/>Perfil</Dropdown.Item>
+                        <Link  to={'/OrderList'} className='dropdown-item'><i className="bi-basket3"/>Ordenes</Link>
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
         </nav>
     )

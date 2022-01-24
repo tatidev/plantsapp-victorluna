@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom'
 import { useContext } from 'react'
 import { cartContext } from './CartContext'
 import { favContext } from './FavContext'
-import {toast} from 'react-toastify'
+import {toastInfo} from '../util/ToastSettings.js'
 
 const Item = ({item}) => {
     const {cartState, dispatch} = useContext(cartContext)
@@ -15,28 +15,12 @@ const Item = ({item}) => {
     const addToCart = itemId =>{
         item.cantidad = 1
         dispatch({type: 'addItem', item: item})
-        toast.info('Producto agregado al carro', {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            });
+        toastInfo('Producto agregado al carro')
     }
 
     const addToFav = itemId =>{
         dispatchFav({type: 'addItem', item: item})
-        toast.info('Producto agregado como favorito', {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            });
+        toastInfo('Producto agregado como favorito')
     }
 
     return (

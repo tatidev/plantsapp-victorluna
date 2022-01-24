@@ -2,6 +2,7 @@ import Carro from './Carro'
 import ItemListContainer from './ItemListContainer'
 import ItemDetailContainer from './ItemDetailContainer'
 import Favoritos from './Favoritos'
+import OrderList from './OrderList'
 import {Routes, Route} from 'react-router-dom'
 
 const Main = () => {
@@ -15,6 +16,7 @@ const Main = () => {
                         <Route path="/item/:id" element={<ItemDetailContainer/>}/>
                         <Route path="/carro" element={<Carro/>}/>
                         <Route path="/fav" element={<Favoritos/>}/>
+                        <Route path="/orderList" element={<OrderList/>}/>
                     </Routes>
                 </div>
             </div>
