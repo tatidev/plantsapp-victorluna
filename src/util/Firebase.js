@@ -2,13 +2,15 @@ import { initializeApp } from "firebase/app";
 import {getFirestore} from 'firebase/firestore';
 import { getStorage } from "firebase/storage";
 
+const envar = process.env
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDqI5H8HLAzhqXS05NJgd938LrCLLQTUM4",
-  authDomain: "plantsapp-bc59b.firebaseapp.com",
-  projectId: "plantsapp-bc59b",
-  storageBucket: "plantsapp-bc59b.appspot.com",
-  messagingSenderId: "215292342523",
-  appId: "1:215292342523:web:a6e70ca8ce11f149fb005e"
+  apiKey: envar.REACT_APP_apiKey, 
+  authDomain: envar.REACT_APP_authDomain,
+  projectId: envar.REACT_APP_projectId,
+  storageBucket: envar.REACT_APP_storageBucket,
+  messagingSenderId: envar.REACT_APP_messagingSenderId,
+  appId: envar.REACT_APP_appId
 };
 
 const app = initializeApp(firebaseConfig);

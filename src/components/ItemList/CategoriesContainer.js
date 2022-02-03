@@ -1,6 +1,6 @@
 import Categories from './Categories';
 import { useEffect, useState} from 'react'
-import { db } from "./Firebase"
+import { db } from "../../util/Firebase"
 import { collection , getDocs} from "firebase/firestore"
 
 function CategoriesContainer() {

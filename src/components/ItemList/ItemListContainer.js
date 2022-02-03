@@ -2,8 +2,8 @@ import { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom'
 import ItemList from "./ItemList"
 import CategoriesContainer from "./CategoriesContainer"
-import Spinner from "./Spinner"
-import { db } from "./Firebase"
+import Spinner from "../../util/Spinner"
+import { db } from "../../util/Firebase"
 import { collection , getDocs , query, where } from "firebase/firestore"
 
 function ItemListContainer({greeting}) {

@@ -1,5 +1,6 @@
-import {storage} from '../components/Firebase'
+import {storage} from './Firebase'
 import { ref, getDownloadURL } from "firebase/storage";
+import { toastError } from './ToastSettings';
 
 export const setImageToSrc = (fileName, objectImgToSrc) => {
     const _ref = ref(storage, fileName)
@@ -8,10 +9,9 @@ export const setImageToSrc = (fileName, objectImgToSrc) => {
     storagePromise
     .then((url) => {
         const img = document.getElementById(objectImgToSrc);
-        img.setAttribute('src', url);
+        if(!!img) img.setAttribute('src', url);
     })
     .catch((error) => {
-        // Handle any errors
-        return error;
+        toastError('Storage: Error en obtener datos de la base: '+error)
     });
 }

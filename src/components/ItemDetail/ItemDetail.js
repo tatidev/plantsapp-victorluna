@@ -1,8 +1,7 @@
 import ItemCount from "./ItemCount"
-import {Link, useNavigate} from 'react-router-dom'
-import {useState, useContext} from 'react'
-import {cartContext} from "./CartContext"
-import ButtonBack from './ButtonBack'
+import {useContext} from 'react'
+import {cartContext} from "../Cart/CartContext"
+import ButtonBack from '../../util/ButtonBack'
 import Carousel from 'react-bootstrap/Carousel';
 
 function ItemDetail({item}) {

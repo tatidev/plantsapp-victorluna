@@ -1,7 +1,7 @@
 import {toast} from 'react-toastify'
 
 const toastParams = {
-    position: "top-right",
+    position: "bottom-right",
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: false,
@@ -12,4 +12,8 @@ const toastParams = {
 
 export const toastInfo = (msg) =>{
     toast.info(msg, toastParams);
+}
+
+export const toastError = (msg) =>{
+    toast.error(msg, toastParams);
 }

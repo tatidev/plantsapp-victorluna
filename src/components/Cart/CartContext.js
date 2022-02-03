@@ -7,7 +7,8 @@ const {Provider} = cartContext
 const cartInitialState = {
     itemsCount: 0,
     itemsTotalPrice: 0,
-    itemList: []
+    itemList: [],
+    costoEnvio: 500
 }
 
 const isInCart = (itemList, itemId) => {

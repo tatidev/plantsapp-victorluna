@@ -1,8 +1,8 @@
 import {Link} from 'react-router-dom'
 import { useContext } from 'react'
-import { cartContext } from './CartContext'
-import { favContext } from './FavContext'
-import {toastInfo} from '../util/ToastSettings.js'
+import { cartContext } from '../Cart/CartContext'
+import { favContext } from '../Favorites/FavContext'
+import {toastInfo} from '../../util/ToastSettings.js'
 
 const Item = ({item}) => {
     const {cartState, dispatch} = useContext(cartContext)
@@ -34,8 +34,8 @@ const Item = ({item}) => {
                         <p className="card-text">{item.name}</p>
                         <div className="d-flex justify-content-between align-item-center">
                             <div className="btn-group">
-                            <button type="button" className="btn btn-sm btn-outline-secondary"><i className="bi-share"/></button>
                             <button type="button" className="btn btn-sm btn-outline-secondary" onClick={addToFav.bind(this, item)}><i className={isInFav ? "bi-suit-heart-fill" : "bi-suit-heart"}/></button>
+                            <button type="button" className="btn btn-sm btn-outline-secondary d-none"><i className="bi-share"/></button>
                             <button type="button" className="btn btn-sm btn-outline-secondary" onClick={addToCart.bind(this, item)}><i className={isInCart ? "bi-cart-fill" : "bi-cart"}/></button>
                             </div>
                             <small className="text-muted">$ {item.price}</small>

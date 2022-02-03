@@ -1,30 +1,30 @@
 import {Link} from 'react-router-dom'
-import { useContext } from 'react'
-import { favContext } from './FavContext'
-import ButtonBack from './ButtonBack'
+import { useContext, useState} from 'react'
+import { cartContext } from './CartContext'
+import ButtonBack from '../../util/ButtonBack'
 
-function Favoritos() {
-    const {favState, dispatchFav} = useContext(favContext)
-    const {itemList} = favState
-
+function Cart() {
+    const {cartState, dispatch} = useContext(cartContext)
+    const {itemsTotalPrice, itemList} = cartState
+    
     const removeItem = itemId =>{
-        dispatchFav({type:'removeItem', idToRemove:itemId})
+        dispatch({type:'removeItem', idToRemove:itemId})
     }
 
-    const clearFav = () => {
-        dispatchFav({type:'clear'})
+    const clearCart = () => {
+        dispatch({type:'clear'})
     }
 
     return (
         <div className="carroPage">
-            {itemList.length == 0 ? <div className="cartEmpty">
-                                        <div className='header'><i className="bi-heart"></i></div>
-                                        <p>
+            {itemsTotalPrice == 0 ? <div className="empty">
+                                        <div className='header'><i className="bi-cart-x"></i></div>
+                                        
                                             <div>
-                                                <h4>No hay productos favoritos</h4>
-                                                <Link as="button" to={"/"} className='btn btn-success'>Seguir navegando</Link>
+                                                <h4>No hay productos en el carro</h4>
+                                                <Link as="button" to={"/"} className='btn btn-success'>Seguir comprando</Link>
                                             </div>
-                                        </p>
+                                        
 
                                     </div>
              : 
@@ -34,7 +34,10 @@ function Favoritos() {
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th className="text-center"><button className="btn btn-sm btn-outline-danger" onClick={clearFav}>Vaciar Favoritos</button></th>
+                                <th className="text-center">Cantidad</th>
+                                <th className="text-center">Precio</th>
+                                <th className="text-center">Subtotal</th>
+                                <th className="text-center"><button className="btn btn-sm btn-outline-danger" onClick={clearCart}>Vaciar Carro</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,6 +56,11 @@ function Favoritos() {
                                                 </div>
                                             </div>
                                         </td>
+                                        <td className="text-center">
+                                            <div className="count-input">{e.cantidad}</div>
+                                        </td>
+                                        <td className="text-center text-lg text-medium">${e.price}</td>
+                                        <td className="text-center text-lg text-medium">${e.cantidad * e.price}</td>
                                         <td className="text-center"><a className="remove-from-cart" href="#" onClick={removeItem.bind(this, e.id)} data-toggle="tooltip" title="" data-original-title="Remove item"><i className="bi-trash"></i></a></td>
                                     </tr>
                                     )
@@ -62,7 +70,15 @@ function Favoritos() {
                     </table>
                 </div>
                 <div className="shopping-cart-footer">
+                    <div className="column">
+                    </div>
+                    <div className="column text-lg">Total: <span className="text-medium">${itemsTotalPrice}</span></div>
+                </div>
+                <div className="shopping-cart-footer">
                     <ButtonBack/>
+                    <div className="column">
+                    <Link as="button" to={"/Order"} className='btn btn-sm btn-success'>Iniciar Compra</Link>
+                    </div>
                 </div>
             </div>
         }
@@ -70,4 +86,4 @@ function Favoritos() {
     )
 }
 
-export default Favoritos
+export default Cart

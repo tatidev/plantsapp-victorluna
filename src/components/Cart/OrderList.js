@@ -1,30 +1,32 @@
 import {Link} from 'react-router-dom'
-import {useEffect, useState} from 'react'
-import ButtonBack from './ButtonBack'
-import Spinner from "./Spinner"
-import { db } from "./Firebase"
-import { collection , getDocs , Timestamp } from "firebase/firestore"
-//import {toastInfo} from '../util/ToastSettings'
+import {useEffect, useState, useContext} from 'react'
+import ButtonBack from '../../util/ButtonBack'
+import Spinner from "../../util/Spinner"
+import { db } from "../../util/Firebase"
+import { collection , getDocs, where, query, Timestamp } from "firebase/firestore"
+import {toastError} from '../../util/ToastSettings'
+import {userContext} from '../User/UserContext'
 
 function OrderList() {
+    const {userState} = useContext(userContext)
     const [orders, setOrders] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const orderCollection = collection(db, "orders")
-        const getData = getDocs(orderCollection)
+        const documentRef = query(orderCollection, where('user.email', '==', userState.email))
+        const getData = getDocs(documentRef)
         
         getData
         .then((res) => {
             setOrders(res.docs.map(doc=>({id: doc.id, ...doc.data()})))
-            console.log(orders, orders.length)
             setLoading(false)
         })
+        .catch(error=>{
+            toastError('Orderlist: Error en obtener informacion de la base: ' + error)
+        })
+        
     }, [])
-
-    const removeItem = itemId =>{
-        //dispatch({type:'removeItem', idToRemove:itemId})
-    }
 
     return (
         <div className="carroPage">
@@ -48,15 +50,13 @@ function OrderList() {
                                 <th className="text-center">Fecha</th>
                                 <th className="text-center">Cantidad de Items</th>
                                 <th className="text-center">Precio</th>
-                                <th className="text-center"><button className="btn btn-sm btn-outline-danger" onClick={removeItem}>Borrar</button></th>
+                                <th className="text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
                         {
                             orders.map((e, k) => {
-                                console.log(e)
                                 const createdAt = new Timestamp(e.created_at.seconds, e.created_at.nanoseconds)
-                                //let dateString = createdAt.toDate()
                                 return (
                                     <tr key={k}>
                                         <td className="text-center">
@@ -70,8 +70,7 @@ function OrderList() {
                                         </td>
                                         <td className="text-center text-lg text-medium">${e.itemsTotalPrice}</td>
                                         <td className="text-center">
-                                            <a className="remove-from-cart" href="#" onClick={removeItem.bind(this, e.id)} data-toggle="tooltip" title="" data-original-title="Borrar item"><i className="bi-trash"></i></a>
-                                            <a className="detail-from-cart" href="#" onClick={removeItem.bind(this, e.id)} data-toggle="tooltip" title="" data-original-title="Ver"><i className="bi-arrow-right-square"></i></a>
+                                            
                                         </td>
                                     </tr>
                                     )
